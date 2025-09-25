@@ -2,7 +2,7 @@ import type { JSX } from "react";
 import { Link, useParams } from "react-router";
 import { useGifDetails } from "~/hooks/useGifs";
 import type { GifObject } from "~/lib/definitions";
-import { formatDate } from "~/lib/utils";
+import { formatDate, handleDownload } from "~/lib/utils";
 
 const getDescriptions = (gif: GifObject) => {
   return [
@@ -57,14 +57,27 @@ export function GifDetails() {
             })}
           </div>
 
-          <Link
-            to={gif.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mt-4 inline-block text-blue-500 hover:underline"
-          >
-            View on Giphy
-          </Link>
+          <div className="mt-6 flex items-center justify-between">
+            <Link
+              to={gif.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block text-blue-500 hover:underline"
+            >
+              View on Giphy
+            </Link>
+
+            <button
+              onClick={() => {
+                const downloadUrl = gif.images.original.url;
+                const fileName = `${gif.title || "gif"}-${gif.id}.gif`;
+                handleDownload(downloadUrl, fileName);
+              }}
+              className="cursor-pointer mt-4 inline-block text-blue-500 hover:underline"
+            >
+              Download GIF
+            </button>
+          </div>
         </div>
       </div>
     </div>

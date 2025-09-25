@@ -15,3 +15,13 @@ export const formatDate = (dateString: string) => {
 
   return date.toLocaleDateString(undefined, options);
 };
+
+export async function handleDownload(url: string, fileName: string) {
+  const res = await fetch(url);
+  const blob = await res.blob();
+  const link = document.createElement("a");
+  link.href = URL.createObjectURL(blob);
+  link.download = fileName;
+  link.click();
+  URL.revokeObjectURL(link.href);
+}
