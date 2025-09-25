@@ -3,8 +3,10 @@ export type GifObject = {
   url: string;
   title: string;
   images: {
-    downsized_medium: { url: string };
+    downsized_medium: { url: string; height: string; width: string };
     original: { url: string; webp: string };
+    preview_gif: { url: string; width: string; height: string };
+    "480w_still": { url: string; width: string; height: string };
   };
   username: string;
   import_datetime: string;
