@@ -1,14 +1,13 @@
 import type { Route } from "./+types/home";
+import { GifDetails } from "~/pages/details";
 
-import { HomePage } from "../pages/home";
-
-export function meta({}: Route.MetaArgs) {
+export function meta({ params }: Route.MetaArgs) {
   return [
     { title: "My Gifs App" },
     { name: "description", content: "Welcome to My Gifs App!" },
   ];
 }
 
-export default function Home() {
-  return <HomePage />;
+export default function Details() {
+  return <GifDetails />;
 }
