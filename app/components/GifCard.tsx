@@ -37,6 +37,7 @@ const DownloadButton = ({
 }) => {
   return (
     <button
+      aria-label="Download GIF"
       onClick={(e) => {
         e.stopPropagation();
         e.preventDefault();
