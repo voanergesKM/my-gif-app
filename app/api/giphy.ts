@@ -2,6 +2,7 @@ import type { GifObject } from "~/lib/definitions";
 
 const API_KEY = import.meta.env.VITE_GIPHY_API_KEY;
 const BASE_URL = `https://api.giphy.com/v1/gifs`;
+const PAGE_LIMIT = 30;
 
 type Pagination = {
   total_count: number;
@@ -18,7 +19,7 @@ export const fetchTrendingGifs = async (
   const url = new URL(`${BASE_URL}/${endpoint}`);
 
   url.searchParams.append("api_key", API_KEY);
-  url.searchParams.append("limit", "20");
+  url.searchParams.append("limit", PAGE_LIMIT.toString());
   url.searchParams.append("offset", offset.toString());
 
   if (searchTerm) {

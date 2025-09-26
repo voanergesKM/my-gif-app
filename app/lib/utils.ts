@@ -16,7 +16,7 @@ export const formatDate = (dateString: string) => {
   return date.toLocaleDateString(undefined, options);
 };
 
-export async function handleDownload(url: string, fileName: string) {
+export async function onGifDownload(url: string, fileName: string) {
   const res = await fetch(url);
   const blob = await res.blob();
   const link = document.createElement("a");

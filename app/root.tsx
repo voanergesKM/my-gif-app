@@ -38,7 +38,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
       </head>
       <body>
         <QueryClientProvider client={queryClient}>
-          <main className="pt-16 pb-4 max-w-[1536px] mx-auto min-h-dvh">
+          <main className="pb-4 px-4 md:px-6 max-w-[1536px] mx-auto min-h-dvh">
             {children}
           </main>
         </QueryClientProvider>

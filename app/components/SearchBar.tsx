@@ -19,7 +19,7 @@ function SearchBar() {
 
   return (
     <div className="flex flex-col gap-1">
-      <label htmlFor="search" className="text-sm font-medium text-gray-700">
+      <label htmlFor="search" className="text-sm font-medium text-gray-300">
         Search GIFs
       </label>
       <input

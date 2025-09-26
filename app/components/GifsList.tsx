@@ -1,7 +1,15 @@
-import React, { useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import { useSearchParams } from "react-router";
 import { useGifs } from "~/hooks/useGifs";
 import GifCard from "./GifCard";
+import Masonry from "react-masonry-css";
+
+const breakpointCols = {
+  default: 4,
+  1100: 3,
+  700: 2,
+  500: 1,
+};
 
 function GifsList() {
   const [searchParams] = useSearchParams();
@@ -22,7 +30,7 @@ function GifsList() {
           fetchNextPage();
         }
       },
-      { rootMargin: "100px" }
+      { rootMargin: "400px" }
     );
 
     observer.observe(loadMoreRef.current);
@@ -33,30 +41,28 @@ function GifsList() {
   }, [fetchNextPage, hasNextPage, isFetchingNextPage]);
 
   if (isFetching && !isFetchingNextPage) {
-    return <GifListSkeleton />;
+    return <Loader />;
   }
 
   return (
     <>
       {data && (
-        <ul className="columns-1 sm:columns-2 md:columns-3 lg:columns-4  gap-4 space-y-4">
-          {data.pages.map((group, i) => (
-            <React.Fragment key={i}>
-              {group.gifs.map((gif) => (
-                <li key={gif.id}>
-                  <GifCard gif={gif} />
-                </li>
-              ))}
-            </React.Fragment>
-          ))}
-        </ul>
+        <Masonry
+          breakpointCols={breakpointCols}
+          className="flex -ml-6"
+          columnClassName="pl-6 flex flex-col space-y-4"
+          onScrollEnd={() => fetchNextPage()}
+          onScrollEndCapture={() => fetchNextPage()}
+        >
+          {data.pages.flatMap((group) =>
+            group.gifs.map((gif) => <GifCard key={gif.id} gif={gif} />)
+          )}
+        </Masonry>
       )}
 
-      <div ref={loadMoreRef} className="h-1" />
-
-      <div className="text-center my-4">
+      <div ref={loadMoreRef} className="text-center my-4">
         {isFetchingNextPage ? (
-          <GifListSkeleton />
+          <Loader />
         ) : hasNextPage ? (
           "Load More"
         ) : (
@@ -69,7 +75,7 @@ function GifsList() {
 
 export default GifsList;
 
-function GifListSkeleton() {
+function Loader() {
   return (
     <ul className="columns-1 sm:columns-2 md:columns-3 lg:columns-4  gap-4 space-y-4">
       {Array.from({ length: 20 }).map((_, idx) => (
