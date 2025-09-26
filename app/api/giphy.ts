@@ -1,7 +1,10 @@
 import type { GifObject } from "~/lib/definitions";
 
-const API_KEY = import.meta.env.VITE_GIPHY_API_KEY;
-const BASE_URL = `https://api.giphy.com/v1/gifs`;
+const PROD = import.meta.env.VITE_PRODUCTION;
+const BASE_URL = PROD
+  ? `https://giphy-api-z6u6.onrender.com/api`
+  : "http://localhost:3000/api";
+
 const PAGE_LIMIT = 30;
 
 type Pagination = {
@@ -18,8 +21,6 @@ export const fetchTrendingGifs = async (
   const endpoint = searchTerm ? "search" : "trending";
   const url = new URL(`${BASE_URL}/${endpoint}`);
 
-  url.searchParams.append("api_key", API_KEY);
-  url.searchParams.append("limit", PAGE_LIMIT.toString());
   url.searchParams.append("offset", offset.toString());
 
   if (searchTerm) {
@@ -44,7 +45,7 @@ export const fetchTrendingGifs = async (
 };
 
 export const fetchGif = async (id: string) => {
-  const res = await fetch(`${BASE_URL}/${id}?api_key=${API_KEY}`);
+  const res = await fetch(`${BASE_URL}/gif/${id}`);
 
   if (!res.ok) throw new Error("Failed to fetch GIF");
 

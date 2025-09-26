@@ -1,87 +1,72 @@
-# Welcome to React Router!
+# 🎥 Giphy Explorer (React + Vite)
 
-A modern, production-ready template for building full-stack React applications using React Router.
+A simple frontend application for searching and browsing GIFs from [Giphy API](https://developers.giphy.com/), featuring infinite scroll and a download option for GIFs.
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/remix-run/react-router-templates/tree/main/default)
+## 🚀 Tech Stack
 
-## Features
+- [React](https://react.dev/)
+- [Vite](https://vitejs.dev/)
+- [TanStack Query](https://tanstack.com/query/latest) — data fetching & caching
+- [TailwindCSS](https://tailwindcss.com/) — styling
+- [Lucide](https://lucide.dev/) — icons
+- [React Router](https://reactrouter.com/) — navigation
 
-- 🚀 Server-side rendering
-- ⚡️ Hot Module Replacement (HMR)
-- 📦 Asset bundling and optimization
-- 🔄 Data loading and mutations
-- 🔒 TypeScript by default
-- 🎉 TailwindCSS for styling
-- 📖 [React Router docs](https://reactrouter.com/)
-
-## Getting Started
-
-### Installation
-
-Install the dependencies:
+## 📦 Installation
 
 ```bash
+# clone the repo
+git clone https://github.com/voanergesKM/my-gif-app.git
+cd <your-repo>
+
+# install dependencies
 npm install
 ```
 
-### Development
+## 🔑 API Setup
 
-Start the development server with HMR:
+⚠️ To keep the Giphy API key secure, requests are proxied through a simple backend (e.g., Express deployed on Render
+or Vercel).
 
-```bash
+Create a small Node/Express proxy server (see giphy-proxy or example code in docs).
+
+Add your GIPHY_API_KEY as an environment variable in Render (or any hosting).
+
+Deploy and grab your backend URL, e.g.:
+
+https://your-giphy-proxy.onrender.com
+
+Frontend environment variables
+
+Create a .env file in the root of your frontend project:
+
+VITE_API_BASE_URL=https://your-giphy-proxy.onrender.com
+
+## 🖥️ Development
+
+Run the dev server:
+
 npm run dev
-```
 
-Your application will be available at `http://localhost:5173`.
+Open http://localhost:5173
+in your browser.
 
-## Building for Production
+## 🏗️ Build
 
-Create a production build:
-
-```bash
 npm run build
-```
+npm run preview
 
-## Deployment
+## ✨ Features
 
-### Docker Deployment
+🔍 Search GIFs via Giphy API
 
-To build and run using Docker:
+📈 Trending GIFs
 
-```bash
-docker build -t my-app .
+⏬ Infinite scroll with Intersection Observer
 
-# Run the container
-docker run -p 3000:3000 my-app
-```
+📥 Download GIF button (with hover/always visible on mobile)
 
-The containerized application can be deployed to any platform that supports Docker, including:
+🎨 Responsive masonry layout with react-masonry-css
 
-- AWS ECS
-- Google Cloud Run
-- Azure Container Apps
-- Digital Ocean App Platform
-- Fly.io
-- Railway
+⚡ Optimized data fetching with TanStack Query
 
-### DIY Deployment
-
-If you're familiar with deploying Node applications, the built-in app server is production-ready.
-
-Make sure to deploy the output of `npm run build`
-
-```
-├── package.json
-├── package-lock.json (or pnpm-lock.yaml, or bun.lockb)
-├── build/
-│   ├── client/    # Static assets
-│   └── server/    # Server-side code
-```
-
-## Styling
-
-This template comes with [Tailwind CSS](https://tailwindcss.com/) already configured for a simple default starting experience. You can use whatever CSS framework you prefer.
-
----
-
-Built with ❤️ using React Router.
+Made with ❤️ using React + Vite.
